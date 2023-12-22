@@ -52,6 +52,7 @@ dependencies:
   dio:
   get:
   flutter_svg:
+  smooth_star_rating: ^1.1.1
 
 
 

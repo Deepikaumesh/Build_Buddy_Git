@@ -1,3 +1,4 @@
+import 'package:build_buddy_project/User/rating.dart';
 import 'package:build_buddy_project/User/user_payment.dart';
 import 'package:build_buddy_project/User/user_requirement.dart';
 import 'package:flutter/cupertino.dart';
@@ -239,6 +240,16 @@ class _Users_Home_PageState extends State<Users_Home_Page> {
                                         privacy_and_policy()));
                           },
                         ),
+            ListTile(
+              leading: const Icon(Icons.video_label),
+              title: const Text(' Rating '),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            rating_fluttre()));
+              },
+            ),
                         ListTile(
                           leading: const Icon(Icons.info),
                           title: const Text(' About Us '),
