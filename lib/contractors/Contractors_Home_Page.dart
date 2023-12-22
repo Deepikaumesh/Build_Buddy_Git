@@ -11,6 +11,7 @@ import '../Main_Screen/about_us.dart';
 import '../main.dart';
 import 'Contracter_Profile_update_Display_Page.dart';
 import 'Display_contractor_user.dart';
+import 'Display_customer_Reviews.dart';
 import 'Display_customer_requirements.dart';
 import 'display_contractor_payment.dart';
 import 'workers/Add_worker.dart';
@@ -180,6 +181,18 @@ class _Contracters_HomePageState extends State<Contracters_HomePage> {
                               Display_customer_requirements()));
                 },
               ),
+              ListTile(
+                leading: const Icon(Icons.person_add_alt_1),
+                title: const Text(' view customer Reviews '),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Display_customer_Reviews()));
+                },
+              ),
+
 
               ListTile(
                 leading: const Icon(Icons.monetization_on_outlined),

@@ -1,5 +1,11 @@
+import 'package:build_buddy_project/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+
+import 'Users_View_Contractor.dart';
 
 class User_Add_Review extends StatefulWidget {
   const User_Add_Review({Key? key}) : super(key: key);
@@ -9,6 +15,11 @@ class User_Add_Review extends StatefulWidget {
 }
 
 class _User_Add_ReviewState extends State<User_Add_Review> {
+  TextEditingController comments =TextEditingController();
+
+  late bool status;
+  late String message;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -21,7 +32,7 @@ class _User_Add_ReviewState extends State<User_Add_Review> {
                 ),
                 child: TextFormField(
                   maxLines: 20,
-                 // controller: _confirmpassword,
+                  controller: comments,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     //label: Text("comments"),
@@ -41,6 +52,9 @@ class _User_Add_ReviewState extends State<User_Add_Review> {
         actions: <Widget>[
           TextButton(
             onPressed: () {
+              setState(() {
+                Submit();
+              });
 
             },
             child: Container(
@@ -53,53 +67,48 @@ class _User_Add_ReviewState extends State<User_Add_Review> {
     );
   }
   //
-  // Future Submit() async {
-  //   var APIURL = "http://$ip_address/Build_buddy_Php_files/Users/paymentt.php";
-  //
-  //   //json maping user entered details
-  //   Map maped_data = {
-  //     'customer_name': namecontroller.text,
-  //     'email_id': emailcontroller.text,
-  //     'phone_no': phonecocontroller.text,
-  //     'account_no': accnocontroller.text,
-  //     'amount': amountcontroller.text,
-  //     'reciever_name': selectedValue,
-  //     'bank_name': bankcontroller.text,
-  //   };
-  //   //send  data using http post to our php code
-  //   http.Response reponse =
-  //   await http.post(Uri.parse(APIURL), body: maped_data);
-  //
-  //   //getting response from php code, here
-  //   var data = jsonDecode(reponse.body);
-  //   var responseMessage = data["message"];
-  //   var responseError = data["error"];
-  //
-  //   // print("DATA: ${data}");
-  //   print(data);
-  //
-  //   if (responseError) {
-  //     setState(() {
-  //       status = false;
-  //       message = responseMessage;
-  //     });
-  //   } else {
-  //     namecontroller.clear();
-  //     phonecocontroller.clear();
-  //     emailcontroller.clear();
-  //     accnocontroller.clear();
-  //
-  //
-  //     setState(() {
-  //       status = true;
-  //       message = responseMessage;
-  //     });
-  //     Fluttertoast.showToast(
-  //         msg: "Payment successful",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         gravity: ToastGravity.CENTER,
-  //         timeInSecForIosWeb: 1,
-  //         backgroundColor: Colors.blueGrey);
-  //   }
-  // }
+  Future Submit() async {
+    var APIURL = "http://$ip_address/Build_buddy_Php_files/Users/Customer_Add_Review.php";
+
+    //json maping user entered details
+    Map maped_data = {
+      'comments': comments.text,
+      'username' :username_user,
+    };
+    //send  data using http post to our php code
+    http.Response reponse =
+    await http.post(Uri.parse(APIURL), body: maped_data);
+
+    //getting response from php code, here
+    var data = jsonDecode(reponse.body);
+    var responseMessage = data["message"];
+    var responseError = data["error"];
+
+    // print("DATA: ${data}");
+    print(data);
+
+    if (responseError) {
+      setState(() {
+        status = false;
+        message = responseMessage;
+      });
+    } else {
+      comments.clear();
+
+
+
+      setState(() {
+        status = true;
+        message = responseMessage;
+      });
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>User_View_Contracter()));
+
+      Fluttertoast.showToast(
+          msg: "Comment Added successfully!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueGrey);
+    }
+  }
 }
