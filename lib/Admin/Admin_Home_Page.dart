@@ -5,12 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Admin-Login_Page.dart';
+import 'Admin_View_Customer_Ratings.dart';
 import 'Admin_View_Real_Estaters.dart';
-import 'Admin_View_user.dart';
 import 'Admin_view_Contracter.dart';
-import 'Display_Data.dart';
-import '../contractors/workers/Add_worker.dart';
-import 'Admin_Searchbar_Contractors.dart';
+
 
 class Admin_HomePage extends StatefulWidget {
   const Admin_HomePage({Key? key}) : super(key: key);
@@ -45,7 +43,30 @@ class _Admin_HomePageState extends State<Admin_HomePage> {
         ),
       ),
 
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          padding: const EdgeInsets.all(0),
+          children: [
 
+            SizedBox(height: 70,),
+
+            ListTile(
+              leading: const Icon(Icons.star),
+              title: const Text('Customer Rating '),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Admin_View_Customer_Rating()));
+
+
+                //Contractor_worker_update_Display_Page
+              },
+            ),
+
+          ],  ),
+      ),
       backgroundColor: Colors.blueGrey.shade100,
       body: SingleChildScrollView(
         child: Column(

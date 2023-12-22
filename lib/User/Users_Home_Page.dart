@@ -241,7 +241,7 @@ class _Users_Home_PageState extends State<Users_Home_Page> {
                           },
                         ),
             ListTile(
-              leading: const Icon(Icons.video_label),
+              leading: const Icon(Icons.star),
               title: const Text(' Rating '),
               onTap: () {
                 Navigator.push(context,
