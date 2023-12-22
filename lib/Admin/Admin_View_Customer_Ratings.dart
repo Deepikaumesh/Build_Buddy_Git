@@ -122,6 +122,7 @@ class _Admin_View_Customer_RatingState extends State<Admin_View_Customer_Rating>
                                       });
                                     },
                                   ),
+                                  trailing: Text("${double.parse(snapshot.data[index].rating_value)}",style: TextStyle(color: Colors.red),)
 
                                 ),
                               ),
